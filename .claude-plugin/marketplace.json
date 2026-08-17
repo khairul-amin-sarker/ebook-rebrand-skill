@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "ebook-rebrand-skill",
+  "version": "1.1.0",
+  "description": "Claude Code marketplace for the PDF-native ebook rebrand workflow.",
+  "owner": {
+    "name": "Khairul Amin"
+  },
+  "plugins": [
+    {
+      "name": "ebook-rebrand",
+      "description": "PDF-native fixed-layout ebook rebrand and recreation workflow with vector infographic preservation and full branding QA.",
+      "version": "1.1.0",
+      "source": "./plugins/ebook-rebrand",
+      "category": "productivity"
+    }
+  ]
+}
