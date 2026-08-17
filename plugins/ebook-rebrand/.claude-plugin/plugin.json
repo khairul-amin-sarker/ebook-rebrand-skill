@@ -1,0 +1,17 @@
+{
+  "name": "ebook-rebrand",
+  "version": "1.1.0",
+  "description": "PDF-native fixed-layout ebook rebrand and recreation workflow with vector infographic preservation and full branding QA.",
+  "author": {
+    "name": "Khairul Amin"
+  },
+  "repository": "https://github.com/khairul-amin-sarker/ebook-rebrand-skill",
+  "keywords": [
+    "ebook",
+    "pdf",
+    "rebrand",
+    "fixed-layout",
+    "svg",
+    "infographic"
+  ]
+}
