@@ -1,8 +1,8 @@
 # PDF-Native Ebook Rebrand Skill
 
-A reusable agent skill for recreating and rebranding a licensed/authorized ebook PDF while preserving the source publication's page geometry, typography, spacing, alignment, page count, colors, and infographics.
+A reusable agent skill/plugin for recreating and rebranding a licensed/authorized ebook PDF while preserving the source publication's page geometry, typography, spacing, alignment, page count, colors, and infographics.
 
-The workflow is designed for Claude Code, Codex, ChatGPT, or other coding/agent environments that can inspect PDFs and generate files.
+The workflow is designed for **Claude Code**, Codex, ChatGPT, and other coding/agent environments that can inspect PDFs and generate files.
 
 ## What this skill does
 
@@ -14,33 +14,88 @@ The workflow is designed for Claude Code, Codex, ChatGPT, or other coding/agent 
 - Uses a 3-page calibration stage before full-book production.
 - Performs structural, typography, branding, vector, visual-match, and mobile-readability QA.
 
-## Files
+# Claude Code: persistent install + slash command
 
-- `SKILL.md` — the complete agent workflow and operating rules.
-- `REQUIREMENTS_TEMPLATE.md` — fill this in for each new ebook project.
-- `QA_CHECKLIST.md` — final pre-delivery quality checks.
-- `EXAMPLE_BOI_VERSE_REQUIREMENTS.md` — example requirement block from a real Boi Verse rebrand workflow.
+This repository now includes a real Claude Code plugin and marketplace manifest.
 
-## How to use with Claude / Claude Code
+### Install once
 
-Give Claude this repository URL and instruct it to:
-
-1. Read `SKILL.md` fully.
-2. Treat `SKILL.md` as the execution SOP for the task.
-3. Ask for/upload the brand logo and source ebook PDF if they are not already provided.
-4. Parse the user's project instructions using `REQUIREMENTS_TEMPLATE.md`.
-5. Follow the calibration gate before full production unless the user explicitly skips it.
-6. Run `QA_CHECKLIST.md` before claiming completion.
-
-Example instruction:
+Inside Claude Code, run:
 
 ```text
-Use this repository as the skill/SOP for the ebook task:
+/plugin marketplace add khairul-amin-sarker/ebook-rebrand-skill
+/plugin install ebook-rebrand@ebook-rebrand-skill
+```
+
+After installation, the plugin is stored by Claude Code on that machine and can be used in later Claude Code sessions without downloading `SKILL.md` again.
+
+### Use anytime
+
+```text
+/ebook-rebrand
+```
+
+Or pass a short instruction:
+
+```text
+/ebook-rebrand Use the attached source PDF and logo. Keep the original page count, typography, spacing, infographic colors and geometry. Replace all old branding with my new brand.
+```
+
+The command loads the full PDF-native ebook-rebrand skill automatically.
+
+> Note: persistent plugin installation applies to Claude Code environments where you control the local Claude Code installation. A temporary hosted Claude chat/container may reset its filesystem and cannot guarantee permanent installation across chats.
+
+## Give Claude only this GitHub link
+
+You can tell Claude Code:
+
+```text
+Install the Claude Code ebook-rebrand plugin from this repository and make it available as a slash command:
 https://github.com/khairul-amin-sarker/ebook-rebrand-skill
 
-Read SKILL.md completely, then follow it strictly.
-I will provide my logo, source PDF, and requirements in the chat.
+Use the repository's .claude-plugin marketplace configuration. After installation I want to invoke it with /ebook-rebrand.
 ```
+
+If Claude Code needs the explicit commands, they are:
+
+```text
+/plugin marketplace add khairul-amin-sarker/ebook-rebrand-skill
+/plugin install ebook-rebrand@ebook-rebrand-skill
+```
+
+## Project-level fallback
+
+If the repository is simply cloned and Claude Code is started from inside it, the repo also contains:
+
+```text
+.claude/commands/ebook-rebrand.md
+```
+
+so `/ebook-rebrand` can be used as a project-level command even without plugin installation.
+
+## Cross-agent files
+
+- `SKILL.md` — authoritative ebook-rebrand SOP.
+- `CLAUDE.md` — Claude Code project instructions; imports the SOP/support files.
+- `AGENTS.md` — portable instructions for Codex and other agents.
+- `.claude/commands/ebook-rebrand.md` — project-level `/ebook-rebrand` command.
+- `.claude-plugin/marketplace.json` — Claude Code marketplace manifest.
+- `plugins/ebook-rebrand/` — installable Claude Code plugin.
+- `REQUIREMENTS_TEMPLATE.md` — project intake template.
+- `QA_CHECKLIST.md` — final pre-delivery quality checks.
+- `EXAMPLE_BOI_VERSE_REQUIREMENTS.md` — example requirement block from a Boi Verse rebrand workflow.
+
+## Normal ebook workflow
+
+After invoking `/ebook-rebrand`, provide:
+
+1. The authorized/licensed source ebook PDF.
+2. Your brand logo.
+3. Your requirements: new title, exact brand casing, copyright year/line, watermark instructions, background changes, old brand strings to remove, etc.
+
+The workflow is:
+
+**source audit → design specification → 3-page calibration → approval → full PDF-native rebuild → vector infographic pass → full QA → final PDF**
 
 ## Rights requirement
 
